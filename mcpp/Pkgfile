@@ -1,0 +1,10 @@
+description="A cool C Preprocessor (CPP)."
+packager="Lukc <lukc AT upyum DOT com>"
+maintainer="Lukc <lukc AT upyum DOT com>"
+url=http://mcpp.sourceforge.net
+
+name=mcpp
+version=2.7.2
+release=1
+includes=(sourceforge autotools)
+
