@@ -1,0 +1,16 @@
+description="Configuration and construction tool."
+longdesc="mk-configure is a lightweight easy for use replacement for GNU autotools, 
+written in bmake (portable version of NetBSD make) and POSIX tools (shell, awk etc.). "
+depends=(bmake) # FIXME: Dependencies names are very likely different on some OS…
+license=BSD
+
+name=mk-configure
+version=0.21.0
+release=1
+includes=(sourceforge)
+
+build() {
+	cd $name-$version
+	bmake DESTDIR=$PKG prefix=$prefix all install
+}
+
