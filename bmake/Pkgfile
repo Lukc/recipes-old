@@ -1,0 +1,25 @@
+description="Portable version of NetBSD's make utility."
+packager="Lukc <lukc AT upyum DOT com>"
+maintainer="Lukc <lukc AT upyum DOT com>"
+depends=(bmake-mk-files)
+
+name=bmake
+version=20101210
+release=1
+source=(ftp://ftp.netbsd.org/pub/NetBSD/misc/sjg/$name-$version.tar.gz)
+
+build() {
+	mkdir build
+	cd build
+	
+	../bmake/configure \
+		--prefix=$prefix \
+		--with-default-sys-path=$sharedir/mk
+	sh make-bootstrap.sh
+	
+	mkdir -p $PKG$bindir
+	cp bmake $PKG$bindir/bmake
+	mkdir -p $PKG$mandir/man1
+	cp ../bmake/bmake.1 $PKG$mandir/man1/bmake.1
+}
+
