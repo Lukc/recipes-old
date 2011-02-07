@@ -1,0 +1,14 @@
+description="mk files used by NetBSD's make: bmake."
+packager="Lukc <lukc AT upyum DOT com>"
+maintainer="Lukc <lukc AT upyum DOT com>"
+
+name=bmake-mk-files
+version=20100612
+release=1
+source=(ftp://ftp.netbsd.org/pub/NetBSD/misc/sjg/mk-$version.tar.gz)
+
+build() {
+	cd mk
+	sh install-mk "$PKG$sharedir/mk"
+}
+

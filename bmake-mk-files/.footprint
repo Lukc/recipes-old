@@ -1,0 +1,57 @@
+drwxr-xr-x	root/root	usr/
+drwxr-xr-x	root/root	usr/share/
+drwxr-xr-x	root/root	usr/share/mk/
+-r--r--r--	root/root	usr/share/mk/auto.dep.mk
+-r--r--r--	root/root	usr/share/mk/auto.obj.mk
+-r--r--r--	root/root	usr/share/mk/autoconf.mk
+-r--r--r--	root/root	usr/share/mk/autodep.mk
+lrwxr-xr-x	root/root	usr/share/mk/bsd.dep.mk	->	dep.mk
+lrwxr-xr-x	root/root	usr/share/mk/bsd.doc.mk	->	doc.mk
+lrwxr-xr-x	root/root	usr/share/mk/bsd.init.mk	->	init.mk
+lrwxr-xr-x	root/root	usr/share/mk/bsd.lib.mk	->	lib.mk
+lrwxr-xr-x	root/root	usr/share/mk/bsd.links.mk	->	links.mk
+lrwxr-xr-x	root/root	usr/share/mk/bsd.man.mk	->	man.mk
+lrwxr-xr-x	root/root	usr/share/mk/bsd.nls.mk	->	nls.mk
+lrwxr-xr-x	root/root	usr/share/mk/bsd.obj.mk	->	obj.mk
+lrwxr-xr-x	root/root	usr/share/mk/bsd.own.mk	->	own.mk
+lrwxr-xr-x	root/root	usr/share/mk/bsd.prog.mk	->	prog.mk
+lrwxr-xr-x	root/root	usr/share/mk/bsd.subdir.mk	->	subdir.mk
+-r--r--r--	root/root	usr/share/mk/dep.mk
+-r--r--r--	root/root	usr/share/mk/doc.mk
+-r--r--r--	root/root	usr/share/mk/dpadd.mk
+-r--r--r--	root/root	usr/share/mk/final.mk
+-r--r--r--	root/root	usr/share/mk/host-target.mk
+-r--r--r--	root/root	usr/share/mk/host.libnames.mk
+-r--r--r--	root/root	usr/share/mk/inc.mk
+-r--r--r--	root/root	usr/share/mk/init.mk
+-r--r--r--	root/root	usr/share/mk/java.mk
+-r--r--r--	root/root	usr/share/mk/lib.mk
+-r--r--r--	root/root	usr/share/mk/libnames.mk
+-r--r--r--	root/root	usr/share/mk/libs.mk
+-r--r--r--	root/root	usr/share/mk/links.mk
+-r--r--r--	root/root	usr/share/mk/man.mk
+-r--r--r--	root/root	usr/share/mk/nls.mk
+-r--r--r--	root/root	usr/share/mk/obj.mk
+-r--r--r--	root/root	usr/share/mk/own.mk
+-r--r--r--	root/root	usr/share/mk/prlist.mk
+-r--r--r--	root/root	usr/share/mk/prog.mk
+-r--r--r--	root/root	usr/share/mk/progs.mk
+-r--r--r--	root/root	usr/share/mk/rst2htm.mk
+-r--r--r--	root/root	usr/share/mk/scripts.mk
+-r--r--r--	root/root	usr/share/mk/subdir.mk
+-r--r--r--	root/root	usr/share/mk/sys.mk
+drwxr-xr-x	root/root	usr/share/mk/sys/
+-r--r--r--	root/root	usr/share/mk/sys/AIX.mk
+-r--r--r--	root/root	usr/share/mk/sys/Darwin.mk
+-r--r--r--	root/root	usr/share/mk/sys/Generic.mk
+-r--r--r--	root/root	usr/share/mk/sys/HP-UX.mk
+-r--r--r--	root/root	usr/share/mk/sys/IRIX.mk
+-r--r--r--	root/root	usr/share/mk/sys/Linux.mk
+-r--r--r--	root/root	usr/share/mk/sys/NetBSD.mk
+-r--r--r--	root/root	usr/share/mk/sys/OSF1.mk
+-r--r--r--	root/root	usr/share/mk/sys/OpenBSD.mk
+-r--r--r--	root/root	usr/share/mk/sys/SunOS.mk
+-r--r--r--	root/root	usr/share/mk/sys/UnixWare.mk
+-r--r--r--	root/root	usr/share/mk/target-flags.mk
+-r--r--r--	root/root	usr/share/mk/warnings.mk
+-r--r--r--	root/root	usr/share/mk/yacc.mk
