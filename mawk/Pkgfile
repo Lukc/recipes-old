@@ -1,0 +1,13 @@
+description="Mike's AWK."
+url="http://invisible-island.net/mawk"
+packager="Lukc <lukc AT upyum DOT com>"
+maintainer="Lukc <lukc AT upyum DOT com>"
+license=GPL
+
+name=mawk
+version=1.3.4-20100625
+release=1
+source=(ftp://invisible-island.net/mawk/$name-$version.tgz)
+unset sharedir # Fail with the --datarootdir opt of configure…
+includes=(autotools)
+
