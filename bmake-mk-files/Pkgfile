@@ -6,6 +6,7 @@ name=bmake-mk-files
 version=20100612
 release=1
 source=(ftp://ftp.netbsd.org/pub/NetBSD/misc/sjg/mk-$version.tar.gz)
+archs=(no-arch)
 
 build() {
 	cd mk
