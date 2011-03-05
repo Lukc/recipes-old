@@ -1,0 +1,25 @@
+description="Complete package manager."
+packager="Lukc <XMPP/SMTP: lukc AT upyum DOT com>"
+maintainer="Lukc <XMPP/SMTP: lukc AT upyum DOT com>"
+url=http://archlinux.org/pacman
+depends=(libarchive grep lzma)
+
+if use perl; then
+	depends=(${depends[@]} perl)
+elif use python; then
+	depends=(${depends[@]} python)
+elif use vala; then
+	depends=(${depends[@]} vala)
+elif use java; then
+	depends=(${depends[@]} java)
+elif use csharp; then
+	depends=(${depends[@]} csharp)
+fi
+
+name=pacman-g2
+version=3.7.8
+release=1
+source=(http://ftp.frugalware.org/pub/other/$name/releases/$name-$version.tar.gz)
+
+includes=(autotools)
+

@@ -1,0 +1,28 @@
+description="A tiny text editor."
+url=http://nano-editor.org
+packager="Lukc <XMPP/STMP: lukc AT upyum DOT com>"
+maintainer="Lukc <XMPP/STMP: lukc AT upyum DOT com>"
+depends=(ncurses)
+
+name=nano
+version=2.2.5
+release=1
+source=(http://www.nano-editor.org/dist/v${version%.*}/$name-$version.tar.gz)
+
+includes=(autotools)
+
+if ! use nls; then
+	configure_opts=(
+		--disable-nls
+	)
+fi
+
+post_build() {
+	if ! use terminfo; then
+		rm -r $PKG/$sharedir/info
+	fi
+	if ! use nano; then
+		rm -r $PKG/$sharedir/nano
+	fi
+	rm $PKG/$bindir/rnano $PKG/$mandir/man1/rnano.1
+}

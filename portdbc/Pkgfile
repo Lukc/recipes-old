@@ -1,0 +1,18 @@
+# Converted from Sepen's Crux's repository by Lukc.
+
+description="CRUX's portdb command line client."
+url=NA
+maintainer="Jose V Beneyto <SMTP: sepen AT crux DOT nu>"
+packager="Jose V Beneyto <SMTP: sepen AT crux DOT nu>"
+depends=(curl libxml2)
+
+name=portdbc
+version=1.0
+release=1
+source=(http://sepen.mine.nu/releases/$name-$version.tar.bz2)
+
+build() {
+    cd $name-$version
+    make
+    make DESTDIR=$PKG install
+}

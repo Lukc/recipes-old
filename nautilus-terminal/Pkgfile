@@ -1,0 +1,16 @@
+description="An integrated terminal for nautilus."
+packager="Lukc <XMPP/SMTP: lukc AT upyum DOT com>"
+maintainer="Lukc <XMPP/SMTP: lukc AT upyum DOT com>"
+url=http://software.flogisoft.com/nautilus-terminal
+depends=(nautilus pygtk pyxdg pyvte nautilus-python)
+
+name=nautilus-terminal
+version=0.5
+release=1
+source=(http://download.flogisoft.com/files/Software/$name/$name\_$version\_src.tar.gz)
+
+build () {
+	cd $name-$version
+	./install.sh --package $PKG
+}
+

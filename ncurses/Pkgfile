@@ -1,0 +1,40 @@
+description="A System V Release 4.0 curses emulation library."
+packager="Lukc <XMPP/SMTP: lukc AT upyum DOT com>"
+maintainer="Lukc <XMPP/SMTP: lukc AT upyum DOT com>"
+url=http://www.gnu.org/software/ncurses/ncurses.html
+depends=()
+
+name=ncurses
+version=5.7
+release=1
+
+includes=(gnu)
+gnu_extension=".tar.gz"
+
+configure_opts=(
+	--with-install-prefix=$PKG
+	--prefix=$prefix
+	--with-normal
+	--with-shared
+	--without-debug
+	--without-ada
+)
+
+build () 
+{ 
+	cd $name-$version;
+	./configure ${configure_opts[@]};
+	make;
+	make DESTDIR=$PKG install;
+	make distclean;
+	./configure ${configure_opts[@]} --enable-widec;
+	make;
+	make DESTDIR=$PKG install;
+	mkdir $PKG/lib;
+	for i in w ''; do
+        	mv $PKG/usr/lib/libncurses$i.so.* $PKG/lib \
+		&& ln -sf libncurses$i.so $PKG/usr/lib/libcurses$i.so \
+		&& ln -sf ../../lib/libncurses$i.so.5 $PKG/usr/lib/libncurses$i.so \
+		&& ln -sf ../../lib/libncurses$i.so.5 $PKG/usr/lib/libncurses$i.so.5;
+	done
+}

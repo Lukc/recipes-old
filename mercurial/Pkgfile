@@ -1,0 +1,14 @@
+# Converted from Crux’s contrib repository using pkgfile-old2new by Lukc.
+
+description="A distributed VCS."
+packager="James Mills <SMTP: prologic AT shortcircuit DOT net DOT au>"
+maintainer="Thomas Penteker <SMTP: tek AT serverop DOT de>"
+url=http://www.selenic.com/mercurial/wiki/
+depends=(python)
+
+name=mercurial
+version=1.6.3
+release=1
+source=(http://www.selenic.com/$name/release/$name-$version.tar.gz)
+
+includes=(python)

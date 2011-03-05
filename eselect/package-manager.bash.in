@@ -1,0 +1,143 @@
+# vim: syntax=sh
+#
+#  Copyright © 2010 Luka Vandervelden
+#  Some rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions
+# are met:
+# 1. Redistributions of source code must retain the above copyright
+#    notice, this list of conditions and the following disclaimer
+#    in this position and unchanged.
+# 2. Redistributions in binary form must reproduce the above copyright
+#    notice, this list of conditions and the following disclaimer in the
+#    documentation and/or other materials provided with the distribution.
+#
+#  THIS SOFTWARE IS PROVIDED BY THE AUTHOR(S) ``AS IS'' AND ANY EXPRESS OR
+#  IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+#  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+#  IN NO EVENT SHALL THE AUTHOR(S) BE LIABLE FOR ANY DIRECT, INDIRECT,
+#  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+#  NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+#  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+#  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+#  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+#  THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+# package_manager
+# It is less or more private. Scripts can use it, but that's not to them to 
+#+ check such things. They should use the next functions instead.
+# Returns the package manager to use… \o/
+package_manager() {
+	local pm
+	: ${PACKAGE_MANAGER:="prt-get"}
+	case "${PACKAGE_MANAGER}" in
+		"prt-get")
+			if [[ -n "`type -p prt-get`" ]]; then
+				pm="prt-get"
+			fi
+		;;
+		"pkg-get")
+			if [[ -n "`type -p pkg-get`" ]]; then
+				pm="pkg-get"
+			fi
+		pkgutils)
+			pm=pkgutils;;
+	esac
+	echo "${pm}"
+}
+
+# arch
+# Returns the arch on which we are.
+arch() {
+	arch=$(uname -m)
+	case ${arch} in
+		alpha|ia64|m68k|ppc|ppc64) ;;
+		arm*) arch=arm ;;
+		i?86) arch=x86 ;;
+		mips*) arch=mips ;;
+		parisc*) arch=hppa ;;
+		"Power Macintosh") arch=ppc ;;
+		s390*) arch=s390 ;;
+		sh*) arch=sh ;;
+		sparc*) arch=sparc ;;
+		x86_64) arch=x86_64 ;;
+		*) write_warning_msg \
+			"Unknown architecture. Please submit a bug report including the output: `uname -m`."
+			return 1
+			;;
+	esac
+	echo ${ret}
+}
+
+isinst() {
+	[[ $# -eq 1 ]] || die "isinst() expects exactly one parameter."
+	
+	local pm="`package_manager`"
+	
+	case $pm in
+		prt-get|pkg-get)
+			$pm isinst $1 &>/dev/null
+			return $?
+			;;
+		pkgutils)
+			grep -q "$1#" /var/lib/pkg/db &> /dev/null
+			return $?
+			;;
+		*)
+			return 1
+			;;
+	esac
+}
+
+# Give the version of a package. :)
+version() {
+	[[ $# -eq 1 ]] || die "best_version() expects exactly one parameter."
+	
+	local pm="`package_manager`"
+	case $pm in
+		prt-get|pkg-get)
+			$pm info $1 | grep "Version:" | sed "s|Version: *||" 2>/dev/null
+			return $?
+		;;
+		*)
+			# prt-get or pkg-get are needed to get the version of a package…
+			return 1
+		;;
+	esac
+}
+
+get_repositories() {
+	local pm="`package_manager`"
+	
+	case $pm in
+		prt-get)
+			grep prtdir /etc/prt-get.conf | sed "s|prtdir ||" 2>/dev/null
+			return $?
+		;;
+		pkg-get)
+			## FIXME: I don't use this thing. If somebody can help me… O:)
+			return 0
+		;;
+		pkgutils)
+			return 1
+		;;
+	esac
+}
+
+depinst() {
+	local pm="`package_manager`"
+	
+	case $pm in
+		prt-get)
+			prt-get depinst $@
+		;;
+		pkg-get)
+			pkg-get depinst $@
+		;;
+		pkgutils)
+			return 1 ## TODO: Install a package if present in a “usual” place.
+		;;
+	esac
+}
+

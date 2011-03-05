@@ -1,0 +1,18 @@
+description="Replicate the functionality of the 'old' apm command on ACPI systems."
+url=http://sourceforge.net/projects/acpiclient/
+packager="piernov <SMTP: piernov AT piernov DOT servegame DOT org>"
+maintainer="piernov <SMTP: piernov AT piernov DOT servegame DOT org>"
+depends=(glibc)
+
+name=acpiclient
+version=1.5
+release=2
+source=(http://downloads.sourceforge.net/$name/acpi-$version.tar.gz)
+ 
+build(){
+cd acpi-$version
+	autoreconf -i
+        ./configure --prefix=/usr
+        make
+        make DESTDIR=$PKG install
+} 

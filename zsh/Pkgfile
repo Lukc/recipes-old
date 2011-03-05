@@ -1,0 +1,35 @@
+description="Very powerfull shell."
+maintainer="Lukc <XMPP/SMTP: lukc AT upyum DOT com>"
+packager="Tilman Sauerbeck <SMTP: tilman AT crux DOT nu>"
+url=http://www.zsh.org/
+depends=(libpcre libcap)
+
+name=zsh
+version=4.3.10
+release=2
+source=(http://www.zsh.org/pub/$name-$version.tar.bz2 zsh-lovers.1)
+build () 
+{ 
+    cd $name-$version;
+    ./configure \
+	--prefix=$prefix \
+	--mandir=$mandir \
+	--enable-etcdir=$sysconfdir/zsh \
+	--enable-zshrc=$sysconfdir/zsh/zshrc \
+	--enable-zshlogin=$sysconfdir/zsh/zshlogin \
+	--enable-zshenv=$sysconfdir/zsh/zshenv \
+	--enable-fndir=$sharedir/zsh/$version/functions \
+	--enable-site-fndir=$sharedir/zsh/site-functions \
+	--enable-zsh-mem \
+	--enable-maildir-support \
+	--enable-function-subdirs \
+	--enable-pcre \
+	--enable-restricted-r \
+	--enable-lfs \
+	--enable-cap \
+	--with-curses-terminfo;
+    make;
+    make DESTDIR=$PKG install;
+    install -m 644 $SRC/zsh-lovers.1 $PKG/$mandir/man1/;
+    rm $PKG/usr/share/zsh/$version/functions/Completion/Unix/_pkg{add,rm,info}
+}

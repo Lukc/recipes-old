@@ -1,0 +1,13 @@
+description="Lightweight and powerfull package manager system."
+packager="Lukc <XMPP/SMTP: lukc AT upyum DOT com>"
+maintainer="Lukc <XMPP/SMTP: lukc AT upyum DOT com>"
+url=http://www.nhopkg.org/
+depends=(bash grep bzip2 gzip)
+
+name=nhopkg
+version=0.5.1
+release=1
+source=(http://downloads.sourceforge.net/project/$name/$name/$name-${version%.*}/$name-$version.tar.bz2)
+
+includes=(autotools)
+

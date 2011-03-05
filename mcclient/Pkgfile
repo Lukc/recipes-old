@@ -1,0 +1,14 @@
+
+name=mcclient
+version=0.4
+release=1
+source=(http://www.randomly.org/projects/MCCP/$name-$version.zip)
+
+function build {
+	cd $name-$version
+	sedi "s|mcclient\.cfg|${sysconfdir}/mcclient\.cfg|" *.[ch]
+	MAKE=gmake pkgmake linux
+	mkdir -p ${bindir}/mcclient
+	cp linux/mcclient ${bindir}/mcclient
+}
+

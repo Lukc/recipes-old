@@ -1,0 +1,200 @@
+# vim: syntax=sh
+# Copyright 2010 Luka Vandervelden
+# Distributed under the terms of the New BSD Licence
+
+DESCRIPTION="Read Nutritive news items"
+MAINTAINER="lukc@linkmauve.fr"
+VERSION="0.1"
+
+# % eselect news
+#Usage: eselect news <action> <options>
+#
+#Standard actions:
+#  help                      Display help text
+#  usage                     Display usage information
+#  version                   Display version information
+#
+#Extra actions:
+#  purge                     Purge read news
+#  unread <item>...          Mark read news items as unread again
+#    all                       Mark all news items as unread
+#    item                      Number of item (from 'list' action)
+# %
+
+### Global variables
+
+NEWS_DIR="/srv/news"
+READ_FILE=~/.news_read
+
+### Global functions
+
+remove_underscores() {
+	for word in $@; do
+		echo "`echo "$word" | sed -e "s|_| |g"`"
+	done
+}
+
+get_author() {
+	head -n 1 $1
+}
+
+get_date() {
+	head -n 2 $1 |\
+	grep -v "$(get_author $1)"
+}
+
+get_content() {
+	local item_lenght=0
+	item_lenght=`wc -l $ITEM | cut -d ' ' -f 1`
+	tail -n $(($item_lenght-3)) $1
+}
+
+read_item() {
+	local ITEM="$1"
+	echo -e "\033[01;34mAuthor: \t$(get_author $ITEM)"
+	echo -e "\033[01;34mDate:   \t$(get_date $ITEM)"
+	echo -e "\033[01;34m\t---- $(remove_underscores "$ITEM" | sed -e "s|\.new||;s|`dirname $ITEM`/||") ----\033[00m "
+	echo -e "\033[00m"
+	local content="$(get_content $ITEM)"
+	local sed_script="	s|=====$|   \\\\033[00m  |
+				s|=====|  \\\\033[01;32m   |
+				s|  \* |  \\\033[00;01m- |
+				s|$|\\\\033[00m|"
+	content="`echo "$content" | sed -e "$sed_script"`"
+	echo -e "$content"
+	if ! is_read $ITEM; then
+		mark_read $ITEM
+	fi
+}
+
+is_read() {
+	if grep -q "##$1##" $READ_FILE 2>/dev/null; then
+		return 0
+	else
+		return 1
+	fi
+}
+
+mark_read() {
+	echo "##$1##" >> $READ_FILE
+}
+
+#  count                     Display number of news items
+#    new                       Count unread news items (default)
+#    all                       Count all news items
+
+describe_count() {
+	echo "Display number of news items"
+}
+
+describe_count_options() {
+	echo "new : Count unread news items (default)"
+	echo "all : Count all news items"
+}
+
+do_count() {
+	local params=
+	local i=0
+	case $1 in
+		""|new|all);;
+		*)
+			die -q "$1: unknown option for count.";;
+	esac
+	for file in `ls ${NEWS_DIR}`; do
+		case $file in
+			*.new)
+				case $1 in
+					""|new)
+						if is_read $NEWS_DIR/$file; then
+							i=$(($i+1))
+						fi
+					;;
+					"all")
+						i=$(($i+1))
+					;;
+				esac
+			;;
+		esac
+	done
+	echo "${i}"
+}
+
+#  list                      List news items
+
+describe_list() {
+	echo "List news items"
+}
+
+do_list() {
+	local params=
+	local i=0
+	local news_list=()
+	for file in `ls ${NEWS_DIR}`; do
+		case $file in
+			*.new)
+				new_name="`echo $file | sed -e "s|\.new||"`"
+				news_list=(${news_list[@]} $new_name)
+				;;
+		esac
+	done
+	write_list_start "News items:"
+	if [[ -n "${news_list[@]}" ]]; then
+		for item in ${news_list[@]}; do
+			i=$(($i+1))
+			if is_read "$NEWS_DIR/${news_list[$(($i-1))]}.new"; then
+				write_numbered_list_entry $i "\033[01;34m(read)   \t`remove_underscores ${news_list[$(($i-1))]}`"
+			else
+				write_numbered_list_entry $i "\033[01;34m(unread) \t`remove_underscores ${news_list[$(($i-1))]}`"
+			fi
+		done
+	else
+		write_kv_list_entry "(none found)"
+	fi
+}
+
+### read
+#  read <item>...            Read news items
+#    --mbox                    Output in mbox format
+#    --raw                     Output in raw format
+#    new                       Read unread news items (default)
+#    all                       Read all news items
+#    item                      Number of item (from 'list' action)
+
+describe_read() {
+	echo "Read news items"
+}
+
+describe_read_parameters() {
+	echo "<item>..."
+}
+
+describe_read_options() {
+	echo "new : Read unread news items (default)"
+	echo "all : Read all news items"
+	echo "item : Number of item (from 'list' action)"
+}
+
+do_read() {
+	local params=
+	local i=0
+	for file in `ls ${NEWS_DIR}`; do
+		case $file in
+			*.new)
+				i=$(($i+1))
+				if [[ "$i" = "$1" ]] || [[ "$1" = "all" ]] || ([[ "$1" = "new" ]] && ! is_read ${NEWS_DIR}/$file); then
+					read_item ${NEWS_DIR}/$file
+				case $1 in
+					all|new)
+					echo -e "  \033[01;34m--------------------\033[00m";;
+					*)
+					exit 0;;
+				esac
+				fi
+				;;
+		esac
+	done
+	if [[ "$1" != "all" ]] && [[ "$1" != "new" ]]; then
+		die -q "There is no entry with this number."
+	fi
+}
+

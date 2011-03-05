@@ -1,0 +1,19 @@
+description="A set of utilities to manage software packages"
+packager="CRUX System Team <SMTP: core-ports AT crux DOT nu>"
+maintainer="Lukc <XMPP/SMTP: lukc AT upyum DOT com>"
+url=http://www.fukt.bsnet.se/~per/pkgutils/
+depends=(libarchive)
+
+name=pkgutils
+version=5.35.1
+release=1
+source=(http://crux.nu/files/$name-$version.tar.gz)
+build () 
+{ 
+    cd $name-$version;
+    make DESTDIR=$PKG install
+    if [[ "$mandir" != "/usr/man" ]]; then
+        mkdir -p $PKG/${mandir%/*}
+        mv $PKG/usr/man $PKG/$mandir
+    fi
+}

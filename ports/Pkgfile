@@ -1,0 +1,24 @@
+description="CRUX ports system tools."
+packager="Lukc <XMPP/STMP: lukc AT upyum DOT com>"
+maintainer="Lukc <XMPP/STMP: lukc AT upyum DOT com>"
+url=http://crux.nu
+depends=()
+
+name=ports
+version=1.5
+release=10
+source=(
+	http://crux.nu/files/tools/$name/$name-$version.tar.gz
+)
+archs=(no-arch)
+
+build () 
+{ 
+    cd $name-$version;
+    make;
+    make DESTDIR=$PKG install;
+    mkdir -p $PKG/usr/share
+    if [[ $mandir != /usr/man ]]; then
+        mv $PKG/usr/man $PKG/usr/share
+    fi
+}
