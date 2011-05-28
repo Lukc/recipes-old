@@ -1,0 +1,12 @@
+#
+# /etc/deadwoodrc
+#
+
+
+bind_address="127.0.0.1"
+chroot_dir = "/var/lib/deadwood"
+cache_file = "cache/dw_cache"
+maximum_cache_elements = 60000
+recursive_acl = "127.0.0.1/16"
+
+# End of file

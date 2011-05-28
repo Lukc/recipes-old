@@ -1,0 +1,27 @@
+packager="Juergen Daubert, jue at crux dot nu"
+maintainer="Kooda <kooda [at] upyum.com>"
+license="BSD"
+
+description="Fully recursive caching DNS resolver."
+longdesc=""
+
+name=deadwood
+version=3.0.02
+release=1
+
+url=http://www.maradns.org/deadwood
+source=(http://maradns.org/deadwood/stable/$name-$version.tar.bz2 deadwoodrc deadwood)
+
+build () {
+    cd $name-$version
+
+    make -C src -f Makefile.centos5 FLAGS="$CFLAGS"
+
+    install -d $PKG{$sbindir,$mandir/man1,$sysconfdir/rc.d,$localstatedir/lib/deadwood}
+    install -d -m 700 -o nobody $PKG/$localstatedir/lib/deadwood/cache
+    install -m 755 src/Deadwood $PKG$sbindir
+    install -m 644 doc/Deadwood.1 $PKG$mandir/man1/deadwood.1
+    install -m 644 $SRC/deadwoodrc $PKG$sysconfdir
+    install -m 755 $SRC/deadwood $PKG$sysconfdir/rc.d
+}
+

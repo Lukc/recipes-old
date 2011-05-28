@@ -1,0 +1,26 @@
+#!/bin/sh
+#
+# /etc/rc.d/deadwood: start/stop deadwood DNS resolver
+#
+
+case $1 in
+start)
+	setsid /usr/sbin/Deadwood -f /etc/deadwoodrc | logger -t deadwood &
+	;;
+stop)
+	killall -q /usr/sbin/Deadwood
+	;;
+restart)
+	$0 stop
+	sleep 2
+	$0 start
+	;;
+dump)
+	kill -s USR1 $(pidof Deadwood)
+	;;
+*)
+	echo "usage: $0 [start|stop|restart|dump]"
+	;;
+esac
+
+# End of file
