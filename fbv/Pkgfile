@@ -1,0 +1,22 @@
+packager="Kooda <kooda [at] upyum.com>"
+maintainer="Kooda <kooda [at] upyum.com>"
+license="GPL"
+
+description="A framebuffer image viewer"
+
+name=fbv
+version=1.0b
+release=1
+depends=(libungif libjpeg libpng)
+
+url=http://s-tech.elsat.net.pl/fbv/
+source=($url/$name-$version.tar.gz)
+
+build() {
+	mkdir -p $PKG$bindir $PKG$mandir/man1
+
+	cd $name-$version
+	./configure --prefix=$prefix --mandir=$mandir
+	pkgmake
+	pkgmake DESTDIR=$PKG install
+}
