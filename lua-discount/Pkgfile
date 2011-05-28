@@ -1,0 +1,12 @@
+name=lua-discount
+version=devel
+release=1
+source=git://github.com/asb/lua-discount.git
+_luaver="$(luac -v | cut -d' ' -f2 | cut -d'.' -f1-2)"
+
+build() {
+	cd $name
+	make
+	mkdir -p $PKG/usr/lib/lua/$_luaver
+	install -m 755 discount.so $PKG/usr/lib/lua/5.1/
+}
