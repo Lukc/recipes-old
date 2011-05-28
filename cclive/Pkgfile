@@ -1,0 +1,18 @@
+packager="Kooda <kooda [at] upyum.com>"
+maintainer="Kooda <kooda [at] upyum.com>"
+license="GPL"
+
+description="A command line video download tool."
+longdesc="cclive is a command line tool for downloading videos from Youtube
+and other similar video websites that require Adobe Flash to view
+the video content. It has low memory footprint compared to other
+similar tools."
+
+name=cclive
+version=0.7.3.1
+release=1
+depends=(quvi boost)
+
+cmake_opts=("-DCMAKE_INSTALL_PREFIX=$prefix")
+includes=(sourceforge cmake)
+
