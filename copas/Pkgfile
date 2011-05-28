@@ -1,0 +1,23 @@
+packager="Kooda <kooda [at] upyum.com>"
+maintainer="Kooda <kooda [at] upyum.com>"
+license="MIT"
+
+description="A dispatcher based on coroutines that can be used by TCP/IP servers."
+longdesc="Copas is a dispatcher based on coroutines that can be used by TCP/IP
+servers. It uses LuaSocket as the interface with the TCP/IP stack."
+
+name=copas
+version=1.1.6
+release=1
+depends=('luasocket' 'coxpcall')
+
+url="http://keplerproject.github.com/$name/"
+source=("http://github.com/downloads/keplerproject/$name/$name-$version.tar.gz")
+lastver="wcat $url|grep 'Current version'|cut -d' ' -f 4"
+
+build()
+{
+	cd $name-$version
+	pkgmake PREFIX=$PKG$prefix install
+}
+
