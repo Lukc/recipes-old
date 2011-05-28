@@ -1,0 +1,25 @@
+packager="Kooda <kooda [at] upyum.com>"
+maintainer="Kooda <kooda [at] upyum.com>"
+license="MIT"
+
+description="pcall and xpcall for coroutines"
+longdesc="Coxpcall encapsulates the protected calls with a coroutine based loop,
+so errors can be dealed without the usual pcall/xpcall issues with coroutines."
+
+name=coxpcall
+version=1.13.0
+release=1
+depends=('lua')
+
+url="http://coxpcall.luaforge.net/"
+source=("http://luaforge.net/frs/download.php/3406/$name-$version.tar.gz")
+lastver="wcat $url|grep 'Current version'|cut -d' ' -f4"
+
+build() {
+	cd $name-$version
+	./configure lua
+	replace "/usr" "$PKG$prefix" config
+	pkgmake
+	pkgmake install
+}
+
