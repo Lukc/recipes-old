@@ -1,12 +1,21 @@
+packager="Kooda <kooda [at] upyum.com>"
+maintainer="Kooda <kooda [at] upyum.com>"
+license="MIT"
+
+description="Lua binding to the Discount markdown library"
+
 name=lua-discount
 version=devel
 release=1
-source=git://github.com/asb/lua-discount.git
 _luaver="$(luac -v | cut -d' ' -f2 | cut -d'.' -f1-2)"
+
+url=http://github.com/asb/lua-discount
+source=git://github.com/asb/lua-discount.git
 
 build() {
 	cd $name
 	make
-	mkdir -p $PKG/usr/lib/lua/$_luaver
-	install -m 755 discount.so $PKG/usr/lib/lua/5.1/
+	mkdir -p $PKG$libdir/lua/$_luaver
+	install -m 755 discount.so $PKG$libdir/lua/5.1/
 }
+
