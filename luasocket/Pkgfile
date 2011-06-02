@@ -1,0 +1,24 @@
+packager="Kooda <kooda [at] upyum.com>"
+maintainer="Kooda <kooda [at] upyum.com>"
+license="MIT"
+
+description="Lua socket library (TCP and UDP)"
+longdesc="LuaSocket is a Lua extension library that is composed by two parts:
+a C core that provides support for the TCP and UDP transport layers, and a set
+of Lua modules that add support for functionality commonly needed by
+applications that deal with the Internet"
+
+name=luasocket
+version=2.0.2
+release=1
+
+url="http://w3.impa.br/~diego/software/luasocket/"
+source=(http://luaforge.net/frs/download.php/2664/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+	replace "/usr/local/share" "$PKG$sharedir" config
+	replace "/usr/local/lib" "$PKG$libdir" config
+	pkgmake install
+}
+
