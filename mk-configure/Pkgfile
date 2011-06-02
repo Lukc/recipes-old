@@ -11,6 +11,6 @@ includes=(sourceforge)
 
 build() {
 	cd $name-$version
-	bmake DESTDIR=$PKG prefix=$prefix all install
+	bmake DESTDIR=$PKG PREFIX=$prefix all install
 }
 
