@@ -1,0 +1,32 @@
+packager="Kooda <kooda [at] upyum.com>"
+maintainer="Kooda <kooda [at] upyum.com>"
+license="MIT"
+
+description="a Lua binding of the Expat library"
+longdesc="LuaExpat is a SAX XML parser based on the Expat library."
+
+name=luaexpat
+version=1.2.0
+release=1
+depends=(expat)
+
+url=http://matthewwild.co.uk/projects/luaexpat/
+source=($url/$name-$version.tar.gz)
+lastver=
+
+_luaver="$(luac -v|cut -d' ' -f2|cut -d'.' -f1-2)"
+_luanver="${_luaver/\./0}"
+
+build() {
+	cd $name-$version
+
+	replace "/usr/local/lib" "$PKG$libdir" config
+	replace "/usr/local/share" "$PKG$sharedir" config
+	replace "/usr/local/include" "$PKG$prefix/include" config
+	replace "500" "$_luanver" config
+	replace "lua/5.0" "lua/$_luaver" config
+
+	pkgmake
+	pkgmake install
+}
+
