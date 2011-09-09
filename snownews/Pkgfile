@@ -1,0 +1,30 @@
+packager="Kooda <kooda [at] upyum.com>"
+maintainer="Kooda <kooda [at] upyum.com>"
+license="GPL"
+
+description="A light and fast RSS feed reader."
+longdesc="Snownews is a text mode RSS/RDF newsreader. It supports all versions
+of RSS natively and supports other formats via plugins."
+
+name=snownews
+version=1.5.12
+release=1
+depends=(libxml2 ncurses)
+
+url=http://kiza.kcore.de/software/snownews/
+_down_url=http://kiza.kcore.de/media/software/$name
+source=($_down_url/$name-$version.tar.gz)
+lastver="lasttar $_down_url"
+
+configure_opts=(--prefix=$prefix)
+if ! use nls; then
+	configure_opts=(${configure_opts[@]} --disable-nls)
+fi
+
+build()
+{
+	cd $name-$version
+	./configure $configure_opts
+	make
+	make DESTDIR=$PKG install
+}
