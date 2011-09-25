@@ -1,0 +1,22 @@
+packager="Kooda <kooda [at] upyum.com>"
+maintainer="Kooda <kooda [at] upyum.com>"
+license="MIT"
+
+description="Lua binding to libarchive"
+longdesc="libarchive integration with Lua so you can read and write tarballs
+from Lua."
+
+name=lua-archive
+version=0
+release=1
+depends=(libarchive)
+
+_luaver="$(luac -v|cut -d' ' -f2|cut -d'.' -f1-2)"
+
+url=https://github.com/brimworks/lua-archive
+source=("https://download.github.com/brimworks-$name-version-$version-0-g042b4be.tar.gz")
+
+dirname=brimworks-$name-cd6e2e4
+cmake_opts=(-DCMAKE_INSTALL_PREFIX=$prefix -DINSTALL_CMOD=$libdir/lua/$_luaver)
+includes=(cmake)
+
