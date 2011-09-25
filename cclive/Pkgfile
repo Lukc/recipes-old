@@ -9,10 +9,9 @@ the video content. It has low memory footprint compared to other
 similar tools."
 
 name=cclive
-version=0.7.3.1
+version=0.7.6
 release=1
 depends=(quvi boost)
 
-cmake_opts=("-DCMAKE_INSTALL_PREFIX=$prefix")
-includes=(sourceforge cmake)
+includes=(sourceforge autotools)
 
