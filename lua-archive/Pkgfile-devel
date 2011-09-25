@@ -1,0 +1,5 @@
+. $PKGMK_ROOT/Pkgfile
+
+version=devel
+source=(git://upyum.com/lua-archive.git)
+dirname=$name

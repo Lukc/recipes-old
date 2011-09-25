@@ -1,5 +1,0 @@
-. $PKGMK_ROOT/Pkgfile
-
-version=trunk
-source=(git://github.com/brimworks/lua-archive.git)
-dirname=$name
