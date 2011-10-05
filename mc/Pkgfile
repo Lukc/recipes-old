@@ -1,0 +1,13 @@
+description="Cli-based file-manager"
+url=https://www.midnight-commander.org
+maintainer="Pingax <XMPP/SMTP: anthony AT pingax DOT no-ip.info>"
+packager="Pingax <XMPP/SMTP: anthony AT pingax DOT no-ip.info>"
+depends=(glib slang)
+
+name=mc
+version=4.7.5.5
+release=1
+source=($url/downloads/$name-$version.tar.xz)
+
+includes=(autotools)
+
