@@ -1,12 +1,17 @@
+packager="Pingax <anthony AT pingax DOT no-ip.info>"
+maintainer="Pingax <anthony AT pingax DOT no-ip.info>"
+license="GPL"
+
 description="Cli-based file-manager"
-url=https://www.midnight-commander.org
-maintainer="Pingax <XMPP/SMTP: anthony AT pingax DOT no-ip.info>"
-packager="Pingax <XMPP/SMTP: anthony AT pingax DOT no-ip.info>"
-depends=(glib slang)
+longdesc="GNU Midnight Commander is a visual file manager, licensed under GNU
+General Public License and therefore qualifies as Free Software."
 
 name=mc
 version=4.7.5.5
 release=1
+depends=(glib slang)
+
+url=https://www.midnight-commander.org
 source=($url/downloads/$name-$version.tar.xz)
 
 includes=(autotools)
