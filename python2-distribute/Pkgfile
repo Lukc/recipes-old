@@ -11,5 +11,4 @@ release=1
 depends=(python)
 
 url=http://packages.python.org/distribute
-source=http://pypi.python.org/packages/source/d/$name/$name-$version.tar.gz
-includes=(autotools python)
+includes=(autotools pypi python)
