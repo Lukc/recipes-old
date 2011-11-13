@@ -5,7 +5,7 @@ url=http://www.zsh.org/
 depends=(libpcre libcap)
 
 name=zsh
-version=4.3.10
+version=4.3.12
 release=2
 source=(http://www.zsh.org/pub/$name-$version.tar.bz2 zsh-lovers.1)
 build () 
@@ -31,5 +31,7 @@ build ()
     make;
     make DESTDIR=$PKG install;
     install -m 644 $SRC/zsh-lovers.1 $PKG/$mandir/man1/;
-    rm $PKG/usr/share/zsh/$version/functions/Completion/Unix/_pkg{add,rm,info}
+    if $Crux; then # Those files are here for Solaris, and conflict with Crux’s tools.
+        rm $PKG$sharedir/zsh/$version/functions/Completion/Unix/_pkg{add,rm,info}
+    fi
 }
