@@ -13,13 +13,16 @@ version=1.4
 release=1
 depends=(libevent ncurses)
 source=(tmux-256color_fix.patch)
-includes=(sourceforge)
+includes=(sourceforge autotools)
 
-build() {
+iuse=(vanilla)
+
+make_opts="PREFIX=$prefix"
+
+pre_build() {
 	cd $name-$version
-	patch -p1 < $SRC/tmux-256color_fix.patch
-	./configure --prefix=$prefix
-	pkgmake
-	pkgmake DESTDIR=$PKG PREFIX=$prefix install
+	if ! use vanilla; then
+		patch -p1 < $SRC/tmux-256color_fix.patch
+	fi
 }
 
