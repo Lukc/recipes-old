@@ -11,3 +11,9 @@ source=(http://tukaani.org/$name/$name-$version.tar.gz)
 
 includes=(autotools)
 
+post_build () {
+	warning 
+	warning "lzma is deprecated. Use xz (or lzip) if you want to compress new files."
+	warning 
+}
+
