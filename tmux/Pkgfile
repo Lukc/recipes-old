@@ -9,17 +9,24 @@ controlled from a single screen. tmux may be detached from a screen and continue
 running in the background, then later reattached"
 
 name=tmux
-version=1.4
+version=1.5
 release=1
 depends=(libevent ncurses)
 source=(tmux-256color_fix.patch)
-includes=(sourceforge)
+includes=(sourceforge autotools)
+make_opts=(PREFIX="$prefix")
 
-build() {
+iuse=(vanilla)
+
+pre_build () {
+	if ! use vanilla; then
+		cd $name-$version
+		patch -p1 < $SRC/tmux-256color_fix.patch
+	fi
+}
+
+check () {
 	cd $name-$version
-	patch -p1 < $SRC/tmux-256color_fix.patch
-	./configure --prefix=$prefix
-	pkgmake
-	pkgmake DESTDIR=$PKG PREFIX=$prefix install
+	make check
 }
 
