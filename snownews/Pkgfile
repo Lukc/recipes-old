@@ -16,10 +16,10 @@ _down_url=http://kiza.kcore.de/media/software/$name
 source=($_down_url/$name-$version.tar.gz)
 lastver="lasttar $_down_url"
 
-configure_opts=(--prefix=$prefix)
-if ! use nls; then
-	configure_opts=(${configure_opts[@]} --disable-nls)
-fi
+configure_opts=(
+	--prefix=$prefix
+	$(use_enable nls)
+)
 
 build()
 {
