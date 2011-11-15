@@ -6,9 +6,11 @@ depends=(python)
 # pkg++ recipe made by Piernov. (he don’t want to maintain the package. :D)
 
 name=pyopenssl
+pypi_name=pyOpenSSL
 version=0.10
 release=1
-source=(http://pypi.python.org/packages/source/p/pyOpenSSL/pyOpenSSL-$version.tar.gz)
+
+includes=(pypi)
 
 build () {
    cd pyOpenSSL-$version
