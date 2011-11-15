@@ -1,0 +1,29 @@
+
+packager="Lukc <lukc@upyum.com>"
+maintainer="Lukc <lukc@upyum.com>"
+description="C tool to manage lzip compressed files."
+url=http://lzip.nongnu.org/
+license=GPL3
+
+longdesc="Lzip is a lossless data compressor based on the LZMA algorithm, 
+with very safe integrity checking and a user interface similar 
+to the one of gzip or bzip2. Lzip decompresses almost as fast 
+as gzip and compresses better than bzip2, which makes it well 
+suited for software distribution and data archiving.
+
+The lzip file format (.lz) is an improved successor of the 
+unsafe and deprecated lzma-alone file format (.lzma)."
+
+lastver="lastver \$(wcat http://download.savannah.gnu.org/releases/lzip/ | grep 'clzip' | sed -e 's/<\/a.*//;s/.*>//;s/clzip-//;s/\.tar\..*//')"
+
+name=clzip
+version=1.2
+release=1
+source=(http://download.savannah.gnu.org/releases/lzip/$name-$version.tar.gz)
+includes=(autotools)
+
+check () {
+	cd $name-$version
+	make check
+}
+

@@ -1,0 +1,63 @@
+
+packager="Lukc <lukc@upyum.com>"
+maintainer="Lukc <lukc@upyum.com>"
+description="The Window Manager From Scratch is a lightweight tiling window manager."
+longdesc="It can be configured with a configuration file, supports Xft (Freetype) fonts
+and is compliant with the Extended Window Manager Hints (EWMH)
+specifications, Xinerama and Xrandr. WMFS can be driven with Vi
+based commands (ViWMFS). Optional Imlib2 support allow WMFS
+to draw image instead of text everywhere you want with a simple
+sequence."
+
+url="http://wmfs.info"
+depends=(xlib)
+license="BSD"
+
+iuse=(imlib2 xrandr xinerama)
+
+use_imlib2=(1 "Build imlib2 supports and adds support of many images formats.")
+# FIXME: What are those two for, alreadỷ?
+use_xrandr=(1)
+use_xinerama=(0)
+
+for use in ${iuse[@]}; do
+	if use $use; then
+		depends=(${depends[@]} $use)
+	fi
+done
+
+if $Crux; then
+	depends=(${depends[@]//xlib/xorg-libx11})
+	depends=(${depends[@]//xrandr/xorg-xrandr})
+	depends=(${depends[@]//xinerama/xorg-xinerama})
+elif $Debian; then
+# Dependencies on Debian…
+	depends=(${depends[@]//xlib/libx11-6})
+	depends=(${depends[@]//xinerama/libxinerama1})
+	depends=(${depends[@]//xrandr/libxrandr2})
+	depends=(${depends[@]//imlib2/libimlib2})
+fi
+
+name=wmfs
+version=devel
+release=1
+source=(git://git.wmfs.info/wmfs.git)
+
+build() {
+	cd $name
+	for use in ${iuse[@]}; do
+		if ! use $use; then
+			sedi "/$(echo "$use" | tr '[a-z]' '[A-Z]')=\"/s/\".*\"/\"\"/" configure
+		fi
+	done
+	
+	# Is not autotools.
+	./configure \
+		--prefix "$prefix" \
+		--man-prefix "$mandir" \
+		--xdg-config-dir "${xdgconfdir:-$sysconfdir/xdg}"
+	
+	make
+	make DESTDIR="$PKG" install
+}
+

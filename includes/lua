@@ -1,0 +1,12 @@
+
+# Remember to update this, in the future.
+lua_version=5.1
+
+depends=(${depends[@]} lua)
+
+if $Debian; then
+	lua_include=$prefix/include/lua$lua_version
+	depends=(${depends[@]//lua/lua${lua_version}} liblua${lua_version})
+fi
+
+# vim: syntax=sh
