@@ -2,7 +2,16 @@ description="Very powerfull shell."
 maintainer="Lukc <XMPP/SMTP: lukc AT upyum DOT com>"
 packager="Tilman Sauerbeck <SMTP: tilman AT crux DOT nu>"
 url=http://www.zsh.org/
-depends=(libpcre libcap)
+depends=(libcap)
+license=MIT
+
+iuse=(pcre)
+
+use_pcre=(1 "Allows using Perl Compatible Regular Expressions as patterns in zsh.")
+
+if use pcre; then
+	depends=(${depends[@]} pcre)
+fi
 
 name=zsh
 version=4.3.12
@@ -23,7 +32,7 @@ build ()
 	--enable-zsh-mem \
 	--enable-maildir-support \
 	--enable-function-subdirs \
-	--enable-pcre \
+	$(use_enable pcre) \
 	--enable-restricted-r \
 	--enable-lfs \
 	--enable-cap \
@@ -34,4 +43,10 @@ build ()
     if $Crux; then # Those files are here for Solaris, and conflict with Crux’s tools.
         rm $PKG$sharedir/zsh/$version/functions/Completion/Unix/_pkg{add,rm,info}
     fi
+}
+
+check ()
+{
+	cd $name-$version
+	make check
 }
