@@ -1,0 +1,18 @@
+
+description="The free and portable approximate regex matching library."
+packager="Lukc <lukc@upyum.com>"
+maintainer="Lukc <lukc@upyum.com>"
+url="http://laurikari.net/tre/"
+license="BSD-2" # Since 2009, for NetBSD! o/
+
+longdesc="TRE is a lightweight, robust, and efficient POSIX compliant 
+regexp matching library with some exciting features such as 
+approximate (fuzzy) matching."
+
+name=tre
+version=0.8.0
+release=1
+source=(http://laurikari.net/tre/tre-$version.tar.bz2)
+
+includes=(autotools)
+
