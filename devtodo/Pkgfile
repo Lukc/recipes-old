@@ -1,0 +1,30 @@
+packager="Youbi youbidou AT singularity DOT fr"
+maintainer="Youbi youbidou AT singularity DOT fr"
+license="GPL"
+
+name="devtodo"
+version=0.1.20
+release=1
+
+description="A todo list maintainer"
+longdesc="Developer Todo is a program to assist developers in maintaining a list of outstanding
+tasks in a heirarchical, colourised, and prioritised list. Additionally, it can automatically list
+outstanding items when you change into a directory."
+url="http://freecode.com/projects/devtodo"
+
+source=('http://swapoff.org/files/devtodo/devtodo-0.1.20.tar.gz'
+'http://pingax.zapto.org/~pingax/todoterm.patch')
+
+includes=(autotools)
+pre_build() 
+{
+cd $name-$version; patch -p0 < ../todoterm.patch
+}
+
+build() {}
+#{
+#    ./configure --prefix=/usr
+#    make
+#    make DESTDIR=$PKG install
+#}
+
