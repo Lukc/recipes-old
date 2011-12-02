@@ -1,5 +1,5 @@
-packager="Youbi youbidou AT singularity DOT fr"
-maintainer="Youbi youbidou AT singularity DOT fr"
+packager="Youbi <youbidou AT singularity DOT fr>"
+maintainer="Youbi <youbidou AT singularity DOT fr>"
 license="GPL"
 
 name="devtodo"
@@ -12,19 +12,14 @@ tasks in a heirarchical, colourised, and prioritised list. Additionally, it can 
 outstanding items when you change into a directory."
 url="http://freecode.com/projects/devtodo"
 
-source=('http://swapoff.org/files/devtodo/devtodo-0.1.20.tar.gz'
-'http://pingax.zapto.org/~pingax/todoterm.patch')
+source=(
+	'http://swapoff.org/files/$name/$name-$version.tar.gz'
+	'http://pingax.zapto.org/~pingax/todoterm.patch'
+)
 
 includes=(autotools)
-pre_build() 
-{
-cd $name-$version; patch -p0 < ../todoterm.patch
+pre_build() {
+	cd $name-$version
+	patch -p0 < ../todoterm.patch
 }
-
-build() {}
-#{
-#    ./configure --prefix=/usr
-#    make
-#    make DESTDIR=$PKG install
-#}
 
