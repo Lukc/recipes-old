@@ -1,13 +1,24 @@
 description="Lightweight and powerfull package manager system."
+longdesc="Nhopkg is a lightweight and powerfull package manager system for
+UNIX-like operating systems. Nhopkg can install, remove, update,
+search and manage software packages (.nho). Nhopkg is currently
+written in Bash Shell Script, but it will be written in Python in
+the next version.
+
+Nhopkg aims to be a universal package manager. For this, Nhopkg 
+isn't only a package manager, furthermore it is a set of guidelines
+to pack up software for any machine. Therefore, to check package
+dependencies, Nhopkg searches for specific files instead of package
+names."
 packager="Lukc <XMPP/SMTP: lukc AT upyum DOT com>"
 maintainer="Lukc <XMPP/SMTP: lukc AT upyum DOT com>"
 url=http://www.nhopkg.org/
+license="GPL"
 depends=(bash grep bzip2 gzip)
 
 name=nhopkg
 version=0.5.1
 release=1
-source=(http://downloads.sourceforge.net/project/$name/$name/$name-${version%.*}/$name-$version.tar.bz2)
 
-includes=(autotools)
+includes=(autotools sourceforge)
 
