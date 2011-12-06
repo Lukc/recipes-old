@@ -1,4 +1,11 @@
 description="Mike's AWK."
+longdesc="mawk is an interpreter for the AWK Programming Language.
+
+The AWK language is useful for manipulation of data files, text retrieval
+and processing, and for prototyping and experimenting with algorithms.
+mawk is a new awk meaning it implements the AWK language as defined in Aho,
+Kernighan and Weinberger, The AWK Programming Language, Addison-Wesley
+Publishing, 1988."
 url="http://invisible-island.net/mawk"
 packager="Lukc <lukc AT upyum DOT com>"
 maintainer="Lukc <lukc AT upyum DOT com>"
@@ -10,4 +17,5 @@ release=1
 source=(ftp://invisible-island.net/mawk/$name-$version.tgz)
 unset sharedir # Fail with the --datarootdir opt of configure…
 includes=(autotools)
+lastver='lastver $(curl "ftp://invisible-island.net/mawk/" | sed -e "s/.*mawk-//;s/\.tgz.*//")'
 
