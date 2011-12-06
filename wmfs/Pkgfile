@@ -10,7 +10,7 @@ to draw image instead of text everywhere you want with a simple
 sequence."
 
 url="http://wmfs.info"
-depends=(xlib)
+depends=(xlib freetype)
 license="BSD"
 
 iuse=(imlib2 xrandr xinerama)
@@ -36,6 +36,7 @@ elif $Debian; then
 	depends=(${depends[@]//xinerama/libxinerama1})
 	depends=(${depends[@]//xrandr/libxrandr2})
 	depends=(${depends[@]//imlib2/libimlib2})
+	depends=(${depends[@]//freetype/libfreetype6})
 fi
 
 name=wmfs
