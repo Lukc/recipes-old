@@ -43,6 +43,7 @@ name=wmfs
 version=devel
 release=1
 source=(git://git.wmfs.info/wmfs.git)
+lastver="echo $version.0" # It’s git, never really up to date.
 
 build() {
 	cd $name
@@ -62,3 +63,7 @@ build() {
 	make DESTDIR="$PKG" install
 }
 
+check() {
+	# What else could we possibly do?
+	wmfs -h > /dev/null
+}
