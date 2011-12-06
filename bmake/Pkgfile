@@ -1,12 +1,19 @@
 description="Portable version of NetBSD's make utility."
+longdesc="bmake is a portable version of NetBSD's make utility,
+conveniently packaged using a configure script, for other environments
+which may lack NetBSD's libraries, regular expression code, etc."
 packager="Lukc <lukc AT upyum DOT com>"
 maintainer="Lukc <lukc AT upyum DOT com>"
+url="http://www.crufty.net/help/sjg/bmake.html"
+license="BSD"
 depends=(bmake-mk-files)
 
 name=bmake
-version=20101210
+version=20111111
 release=1
 source=(ftp://ftp.netbsd.org/pub/NetBSD/misc/sjg/$name-$version.tar.gz)
+# The .0 in the last sed command is due to a bug in pkg++’ vercmp.
+lastver="lastver \$(wcat 'ftp://ftp.netbsd.org/pub/NetBSD/misc/sjg/' | grep bmake- | grep -v 2009 | sed -e 's/.*bmake-//;s/\.tar\.gz.*/.0/') | sed -e 's/\.0$//'"
 
 build() {
 	mkdir build
@@ -21,5 +28,12 @@ build() {
 	cp bmake $PKG$bindir/bmake
 	mkdir -p $PKG$mandir/man1
 	cp ../bmake/bmake.1 $PKG$mandir/man1/bmake.1
+}
+
+check() {
+	If you saw a test suite, just tell me.
+	echo "xxx: $PKG$prefix/bin/bmake" > Makefile
+	echo "	@echo $(info bmake tests ended well.)" >> Makefile
+	$PKG$prefix/bin/bmake -f Makefile || error "bmake tests failed."
 }
 
