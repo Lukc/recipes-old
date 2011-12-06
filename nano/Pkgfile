@@ -1,16 +1,27 @@
 description="A tiny text editor."
+longdesc="GNU nano is a small and friendly text editor. Besides basic text
+editing, nano offers many extra features like an interactive search
+and replace, go to line and column number, auto-indentation, feature
+toggles, internationalization support, and filename tab completion.
+
+The original goal for nano was a complete bug-for-bug compatible
+emulation of Pico, but nano's current goal is to be as compatible as
+possible while offering a superset of Pico's functionality."
 url=http://nano-editor.org
 packager="Lukc <XMPP/STMP: lukc AT upyum DOT com>"
 maintainer="Lukc <XMPP/STMP: lukc AT upyum DOT com>"
+license="GPLv2"
 depends=(ncurses)
 
 name=nano
-version=2.2.5
+version=2.2.6
 release=1
 source=(http://www.nano-editor.org/dist/v${version%.*}/$name-$version.tar.gz)
+lastver="wcat '$url' | egrep '(stable)' | sed -e 's/ (stable).*//'"
 
 includes=(autotools)
 
+iuse=(nls)
 if ! use nls; then
 	configure_opts=(
 		--disable-nls
