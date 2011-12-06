@@ -1,19 +1,32 @@
 description="A set of utilities to manage software packages"
+longdesc="Originating from Crux, the pkgutils are a very simple set of tools
+to manage packages. They can add, remove and get some basic
+informations about them. There is no dependencies support
+in it."
 packager="CRUX System Team <SMTP: core-ports AT crux DOT nu>"
 maintainer="Lukc <XMPP/SMTP: lukc AT upyum DOT com>"
 url=http://www.fukt.bsnet.se/~per/pkgutils/
+license="GPL"
 depends=(libarchive)
 
 name=pkgutils
 version=5.35.1
 release=1
 source=(http://crux.nu/files/$name-$version.tar.gz)
-build () 
-{ 
-    cd $name-$version;
-    make DESTDIR=$PKG install
-    if [[ "$mandir" != "/usr/man" ]]; then
-        mkdir -p $PKG/${mandir%/*}
-        mv $PKG/usr/man $PKG/$mandir
-    fi
+lastver="lastver \$(wcat 'http://crux.nu/files/' | grep '$name' | sed -e 's/.*$name-//;s/\.tar\.gz.*//' )"
+
+build() { 
+	cd $name-$version;
+	make DESTDIR=$PKG install
+	if [[ "$mandir" != "/usr/man" ]]; then
+		mkdir -p $PKG/${mandir%/*}
+		mv $PKG/usr/man $PKG/$mandir
+	fi
+}
+
+check() {
+	# No check. We could try to install a package in an alternative
+	#+ root, but… would be a little to resources-intensive for almost
+	#+ nothing.
+	:
 }
