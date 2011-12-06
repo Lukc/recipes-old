@@ -17,5 +17,5 @@ release=1
 source=(ftp://invisible-island.net/mawk/$name-$version.tgz)
 unset sharedir # Fail with the --datarootdir opt of configure…
 includes=(autotools)
-lastver='lastver $(curl "ftp://invisible-island.net/mawk/" | sed -e "s/.*mawk-//;s/\.tgz.*//")'
+lastver='lastver $(wcat "ftp://invisible-island.net/mawk/" | sed -e "s/.*mawk-//;s/\.tgz.*//")'
 
