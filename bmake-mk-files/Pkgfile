@@ -1,15 +1,25 @@
 description="mk files used by NetBSD's make: bmake."
+longdesc="This package contains mk files for bmake. They contain predefined
+rules and variables to automate building on a large variety of platforms."
 packager="Lukc <lukc AT upyum DOT com>"
 maintainer="Lukc <lukc AT upyum DOT com>"
+url=http://www.crufty.net/help/sjg/bmake.html
+license="BSD"
 
 name=bmake-mk-files
-version=20100612
+version=20111111
 release=1
 source=(ftp://ftp.netbsd.org/pub/NetBSD/misc/sjg/mk-$version.tar.gz)
+# The .0 in the last sed command is due to a bug in pkg++’ vercmp.
+lastver="lastver \$(wcat 'ftp://ftp.netbsd.org/pub/NetBSD/misc/sjg/' | grep mk- | grep -v 2009 | sed -e 's/.*mk-//;s/\.tar\.gz.*/.0/') | sed -e 's/\.0$//'"
 archs=(no-arch)
 
 build() {
 	cd mk
 	sh install-mk "$PKG$sharedir/mk"
+}
+
+check() {
+	: # Those are just config files for automation. We cannot check them.
 }
 
