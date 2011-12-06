@@ -1,7 +1,18 @@
 description="A System V Release 4.0 curses emulation library."
+longdesc="The Ncurses (new curses) library is a free software emulation of
+curses in System V Release 4.0, and more. It uses Terminfo format,
+supports pads and color and multiple highlights and forms
+characters and function-key mapping, and has all the other
+SYSV-curses enhancements over BSD Curses.
+
+The distribution includes the library and support utilities, including
+a terminfo compiler tic, a decompiler infocmp, clear, tput, tset,
+and a termcap conversion tool captoinfo. Full manual pages are
+provided for the library and tools."
 packager="Lukc <XMPP/SMTP: lukc AT upyum DOT com>"
 maintainer="Lukc <XMPP/SMTP: lukc AT upyum DOT com>"
 url=http://www.gnu.org/software/ncurses/ncurses.html
+license="GPL"
 depends=()
 
 name=ncurses
@@ -11,17 +22,22 @@ release=1
 includes=(gnu)
 gnu_extension=".tar.gz"
 
+iuse=(ada debug)
+
+use_ada=(0 "Enable Ada binding.")
+use_debug=(0 "Enable debug symbols.")
+
+include autotools
 configure_opts=(
 	--with-install-prefix=$PKG
-	--prefix=$prefix
 	--with-normal
 	--with-shared
-	--without-debug
-	--without-ada
+	$(use_with debug)
+	$(use_with ada)
 )
 
-build () 
-{ 
+build() {
+	# The two-build is probably inspired by what comes from Crux. 
 	cd $name-$version;
 	./configure ${configure_opts[@]};
 	make;
@@ -32,9 +48,9 @@ build ()
 	make DESTDIR=$PKG install;
 	mkdir $PKG/lib;
 	for i in w ''; do
-        	mv $PKG/usr/lib/libncurses$i.so.* $PKG/lib \
-		&& ln -sf libncurses$i.so $PKG/usr/lib/libcurses$i.so \
-		&& ln -sf ../../lib/libncurses$i.so.5 $PKG/usr/lib/libncurses$i.so \
-		&& ln -sf ../../lib/libncurses$i.so.5 $PKG/usr/lib/libncurses$i.so.5;
+        	mv $PKG$libdir/libncurses$i.so.* $PKG/lib \
+		&& ln -sf libncurses$i.so $PKG$libdir/libcurses$i.so \
+		&& ln -sf ../../lib/libncurses$i.so.5 $PKG$libdir/libncurses$i.so \
+		&& ln -sf ../../lib/libncurses$i.so.5 $PKG$libdir/libncurses$i.so.5;
 	done
 }
