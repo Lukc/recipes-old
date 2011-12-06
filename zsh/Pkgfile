@@ -1,4 +1,12 @@
 description="Very powerfull shell."
+longdesc="Zsh is a shell designed for interactive use, although it is also a
+powerful scripting language. Many of the useful features of bash,
+ksh, and tcsh were incorporated into zsh; many original features
+were added.
+
+Zsh has command line editing, builtin spelling correction, 
+programmable command completion, shell functions (with autoloading),
+a history mechanism, and a host of other features. "
 maintainer="Lukc <XMPP/SMTP: lukc AT upyum DOT com>"
 packager="Tilman Sauerbeck <SMTP: tilman AT crux DOT nu>"
 url=http://www.zsh.org/
@@ -17,32 +25,34 @@ name=zsh
 version=4.3.12
 release=2
 source=(http://www.zsh.org/pub/$name-$version.tar.bz2 zsh-lovers.1)
+lastver='wcat "http://zsh.sourceforge.net/Arc/source.html" | egrep "zsh-.*\.tar\.gz" | head -n 1 | sed -e "s/\.tar\.gz<\/a>.*//;s/.*>zsh-//"'
+
 build () 
 { 
-    cd $name-$version;
-    ./configure \
-	--prefix=$prefix \
-	--mandir=$mandir \
-	--enable-etcdir=$sysconfdir/zsh \
-	--enable-zshrc=$sysconfdir/zsh/zshrc \
-	--enable-zshlogin=$sysconfdir/zsh/zshlogin \
-	--enable-zshenv=$sysconfdir/zsh/zshenv \
-	--enable-fndir=$sharedir/zsh/$version/functions \
-	--enable-site-fndir=$sharedir/zsh/site-functions \
-	--enable-zsh-mem \
-	--enable-maildir-support \
-	--enable-function-subdirs \
-	$(use_enable pcre) \
-	--enable-restricted-r \
-	--enable-lfs \
-	--enable-cap \
-	--with-curses-terminfo;
-    make;
-    make DESTDIR=$PKG install;
-    install -m 644 $SRC/zsh-lovers.1 $PKG/$mandir/man1/;
-    if $Crux; then # Those files are here for Solaris, and conflict with Crux’s tools.
-        rm $PKG$sharedir/zsh/$version/functions/Completion/Unix/_pkg{add,rm,info}
-    fi
+	cd $name-$version;
+	./configure \
+		--prefix=$prefix \
+		--mandir=$mandir \
+		--enable-etcdir=$sysconfdir/zsh \
+		--enable-zshrc=$sysconfdir/zsh/zshrc \
+		--enable-zshlogin=$sysconfdir/zsh/zshlogin \
+		--enable-zshenv=$sysconfdir/zsh/zshenv \
+		--enable-fndir=$sharedir/zsh/$version/functions \
+		--enable-site-fndir=$sharedir/zsh/site-functions \
+		--enable-zsh-mem \
+		--enable-maildir-support \
+		--enable-function-subdirs \
+		$(use_enable pcre) \
+		--enable-restricted-r \
+		--enable-lfs \
+		--enable-cap \
+		--with-curses-terminfo;
+	make;
+	make DESTDIR=$PKG install;
+	install -m 644 $SRC/zsh-lovers.1 $PKG/$mandir/man1/;
+	if $Crux; then # Those files are here for Solaris, and conflict with Crux’s tools.
+		rm $PKG$sharedir/zsh/$version/functions/Completion/Unix/_pkg{add,rm,info}
+	fi
 }
 
 check ()
