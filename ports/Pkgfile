@@ -1,24 +1,31 @@
-description="CRUX ports system tools."
+description="CRUX ports system tool."
+longdesc="CRUX users use the ports utility to download ports from the
+repository and place them in /usr/ports/. The ports utility uses
+rsync, httpup or a VCS to do the actual download and synchronization."
 packager="Lukc <XMPP/STMP: lukc AT upyum DOT com>"
 maintainer="Lukc <XMPP/STMP: lukc AT upyum DOT com>"
 url=http://crux.nu
-depends=()
+license="GPLv2"
+depends=(bash) # Fork working with zsh in progress.
 
 name=ports
 version=1.5
 release=10
-source=(
-	http://crux.nu/files/tools/$name/$name-$version.tar.gz
-)
+source=(http://crux.nu/files/tools/$name/$name-$version.tar.gz)
+lastver="lastver \$(wcat http://crux.nu/files/tools/ports/ | egrep 'ports-.*tar\.gz' | sed -e 's/\.tar\.gz<.*//;s/.*>ports-//')"
 archs=(no-arch)
 
-build () 
-{ 
-    cd $name-$version;
-    make;
-    make DESTDIR=$PKG install;
-    mkdir -p $PKG/usr/share
-    if [[ $mandir != /usr/man ]]; then
-        mv $PKG/usr/man $PKG/usr/share
-    fi
+build () { 
+	cd $name-$version;
+	make;
+	make DESTDIR=$PKG install;
+	if [[ $mandir != /usr/man ]]; then
+		mkdir -p $PKG/usr/share
+		mv $PKG/usr/man $PKG/usr/share
+	fi
+}
+
+check () {
+	info "If your bash installation is working, ports will also be working."
+	info "  So, no test suite is available."
 }
