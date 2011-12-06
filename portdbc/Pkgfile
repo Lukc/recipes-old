@@ -7,7 +7,7 @@ packager="Jose V Beneyto <SMTP: sepen AT crux DOT nu>"
 depends=(curl libxml2)
 
 name=portdbc
-version=1.0
+version=1.1
 release=1
 source=(http://sepen.mine.nu/releases/$name-$version.tar.bz2)
 
