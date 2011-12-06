@@ -1,20 +1,32 @@
 description="One way sync over HTTP."
+longdesc="httpup is a simple program to synchronize data in one direction. It
+uses HTTP as transport, using libcurl as backend."
 packager="Lukc <XMPP/SMTP: lukc AT upyum DOT com>"
 maintainer="Lukc <XMPP/SMTP: lukc AT upyum DOT com>"
 url=http://jw.tks6.net/files/crux/httpup_manual.html
+license="GPLv2"
 depends=(curl)
 
 name=httpup
-version=0.4.0k
+version=0.4.0j
 release=1
 source=(http://jw.tks6.net/files/crux/$name-$version.tar.gz httpup)
-build () 
-{ 
-    cd $name-$version;
-    sed -i -e "s|-Werror|$CFLAGS|" Makefile;
-    pkgmake prefix=$prefix;
-    mkdir -p $PKG/usr/{bin,share/man/man8};
-    cp httpup httpup-repgen $PKG/usr/bin;
-    install -D -m 755 $SRC/httpup $PKG/etc/ports/drivers/httpup;
-    cp *.8 $PKG/usr/share/man/man8
+lastver="wcat 'http://jw.tks6.net/files/crux/' | egrep 'httpup-.*\.tar\.gz' | sed -e 's/.*httpup-//;s/\.tar\.gz.*//' | tail -n 1"
+
+build() { 
+	cd $name-$version;
+	sed -i -e "s|-Werror|$CFLAGS|" Makefile;
+	pkgmake prefix=$prefix;
+	mkdir -p $PKG/usr/{bin,share/man/man8};
+	cp httpup httpup-repgen $PKG/usr/bin;
+	install -D -m 755 $SRC/httpup $PKG/etc/ports/drivers/httpup;
+	cp *.8 $PKG/usr/share/man/man8
 }
+
+check() {
+	cd /tmp
+	# I took this repository because it was quiet… empty.
+	httpup http://users.informatik.haw-hamburg.de/~holler_f/crux_ports/ httpup-test
+	[[ -e httpup-test && -e httpup-test/songbird-bin64 ]]
+}
+
