@@ -1,6 +1,0 @@
-drwxr-xr-x	root/root	opt/
-drwxr-xr-x	root/root	opt/bin/
--rwxr-xr-x	root/root	opt/bin/bmake
-drwxr-xr-x	root/root	opt/man/
-drwxr-xr-x	root/root	opt/man/man1/
--rw-r--r--	root/root	opt/man/man1/bmake.1.gz
