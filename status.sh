@@ -10,8 +10,10 @@ for packager in Youbi piernov Kooda Lukc; do
 		(
 			cd "$i"
 			if egrep -q "$packager" Pkgfile*; then
-				echo "-- [[ $i ]]"
-				pkg++ -cp 2>&1 | tee -a ../log.$packager
+				{
+					echo "-- [[ $i ]]"
+					pkg++ -cp 2>&1
+				} | tee -a ../log.$packager
 			fi
 		)
 	done
