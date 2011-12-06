@@ -16,7 +16,7 @@ license="GPL"
 depends=()
 
 name=ncurses
-version=5.7
+version=5.9
 release=1
 
 includes=(gnu)
