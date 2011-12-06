@@ -10,7 +10,7 @@ for i in ${iuse[@]}; do
 		depends=(${depends[@]} $i)
 	fi
 	configure_opts=($(use_with $i))
-end
+done
 
 name=pacman-g2
 version=3.7.8
