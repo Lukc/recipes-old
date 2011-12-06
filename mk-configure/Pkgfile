@@ -1,3 +1,6 @@
+packager="Lukc <lukc@upyum.com>"
+maintainer="Lukc <lukc@upyum.com>"
+
 description="Configuration and construction tool."
 longdesc="mk-configure is a lightweight easy for use replacement for GNU autotools, 
 written in bmake (portable version of NetBSD make) and POSIX tools (shell, awk etc.). "
@@ -5,12 +8,43 @@ depends=(bmake) # FIXME: Dependencies names are very likely different on some OS
 license=BSD
 
 name=mk-configure
-version=0.21.0
+version=0.21.2
 release=1
 includes=(sourceforge)
 
+iuse=(pmake)
+use_pmake=(0 "Try to use pmake instead of bmake.")
+if $Debian; then
+	use_pmake[1]=1
+fi
+
+if use pmake; then
+	depends=(${depends[@]//bmake/pmake})
+fi
+
 build() {
 	cd $name-$version
-	bmake DESTDIR=$PKG PREFIX=$prefix all install
+	local makeopts
+	makeopts=(
+		"DESTDIR=$PKG"
+		"PREFIX=$prefix"
+		"MANDIR=$mandir"
+		"LIBEXECDIR=$libexecdir"
+		"LIBDIR=$libdir"
+		"DATADIR=$sharedir"
+		"SYSCONFDIR=$sysconfdir"
+		"INCSDIR=$includedir"
+	)
+	if use pmake; then
+		pmake ${makeopts[@]} all install
+	else
+		bmake ${makeopts[@]} all install
+	fi
+}
+
+check() {
+	warning
+	warning "No test suite currently available for mk-configure."
+	warning
 }
 
