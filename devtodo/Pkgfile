@@ -5,12 +5,13 @@ license="GPL"
 name="devtodo"
 version=0.1.20
 release=1
+lastver="lastver \$(wcat 'http://swapoff.org/devtodo.html' | grep 'devtodo-.*\.tar\.gz' | sed -e 's/.*>devtodo-//;s/\.tar\.gz<.*//')"
 
 description="A todo list maintainer"
 longdesc="Developer Todo is a program to assist developers in maintaining a list of outstanding
 tasks in a heirarchical, colourised, and prioritised list. Additionally, it can automatically list
 outstanding items when you change into a directory."
-url="http://freecode.com/projects/devtodo"
+url="http://swapoff.org/devtodo.html"
 
 source=(
 	'http://swapoff.org/files/$name/$name-$version.tar.gz'
