@@ -1,8 +1,15 @@
 description="Complete package manager."
+longdesc="Pacman-G2 is a fork of the not-yet-released cvs version of the
+complete rewrite of pacman by Aurelien Foret (the old monolithic pacman
+is written by Judd Vinet).
+
+So it provides a library interface to create realy frontends (not just
+wrappers) to this great package management tool. "
 packager="Lukc <XMPP/SMTP: lukc AT upyum DOT com>"
 maintainer="Lukc <XMPP/SMTP: lukc AT upyum DOT com>"
 url=http://archlinux.org/pacman
-depends=(libarchive grep lzma)
+license="GPL"
+depends=(libarchive grep bzip2)
 
 iuse=(perl python vala java csharp)
 for i in ${iuse[@]}; do
@@ -13,9 +20,10 @@ for i in ${iuse[@]}; do
 done
 
 name=pacman-g2
-version=3.7.8
+version=3.8.6
 release=1
 source=(http://ftp.frugalware.org/pub/other/$name/releases/$name-$version.tar.gz)
+lastver="lastver \$(wcat ftp://ftp.frugalware.org/pub/other/$name/releases/ | grep '$name-.*\.tar\.gz' | sed -e 's/.* $name-//;s/\.tar\.gz.*//')"
 
 includes=(autotools)
 
