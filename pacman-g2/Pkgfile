@@ -9,7 +9,7 @@ packager="Lukc <XMPP/SMTP: lukc AT upyum DOT com>"
 maintainer="Lukc <XMPP/SMTP: lukc AT upyum DOT com>"
 url=http://archlinux.org/pacman
 license="GPL"
-depends=(libarchive grep bzip2)
+depends=(libarchive grep lzma bzip2)
 
 iuse=(perl python vala java csharp)
 for i in ${iuse[@]}; do
