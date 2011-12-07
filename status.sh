@@ -16,7 +16,7 @@ include() {
 
 echo "=== {{ pkg++ standards compliance }} ==="
 
-for packager in Youbi piernov Kooda Lukc; do
+for packager in Youbi Kooda Lukc; do
 	echo "%% {{ $packager }} %%"
 	: > log.$packager
 	for i in *; do

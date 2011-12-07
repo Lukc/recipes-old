@@ -6,7 +6,8 @@ devices."
 
 url=http://sourceforge.net/projects/acpiclient/
 packager="piernov <SMTP: piernov AT piernov DOT servegame DOT org>"
-maintainer="piernov <SMTP: piernov AT piernov DOT servegame DOT org>"
+oldmaintainer="piernov <SMTP: piernov AT piernov DOT servegame DOT org>"
+maintainer=""
 depends=(glibc)
 
 name=acpiclient
