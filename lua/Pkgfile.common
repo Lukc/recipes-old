@@ -1,0 +1,45 @@
+description="Lua is a powerful, fast, lightweight, embeddable scripting language."
+longdesc="Lua combines simple procedural syntax with powerful data description
+constructs based on associative arrays and extensible semantics. Lua is
+dynamically typed, runs by interpreting bytecode for a register-based virtual
+machine, and has automatic memory management with incremental garbage
+collection, making it ideal for configuration, scripting, and rapid
+prototyping."
+
+packager="Lukc <lukc@upyum.com>"
+maintainer="Lukc <lukc@upyum.com>"
+license="MIT"
+url="http://www.lua.org"
+
+name=lua
+release=1
+source=(http://www.lua.org/work/$name-$version.tar.gz)
+lastver="lastver \$(wcat http://www.lua.org/work/ | grep 'lua-.*\.tar\.gz' | sed -e 's/.*\">lua-//;s/\.tar\.gz<.*//' | grep -v HREF)"
+iuse=(slots)
+
+include lua
+depends=() # The lua dependency is not required, in this specific case.
+lua_version=${version%.*}
+
+build () {
+	cd $name-${version%-*}
+	pkgmake INSTALL_TOP=$PKG/$prefix linux
+	pkgmake INSTALL_TOP=$PKG/$prefix install
+	if use slots; then
+		for i in lua luac; do
+			mv ${PKG}/$prefix/bin/$i ${PKG}/$prefix/bin/$i-${lua_version}
+			ln -s $prefix/bin/$i-${lua_version} ${PKG}/$prefix/bin/$i
+		done
+		for i in $(ls ${PKG}/$prefix/include); do
+			mkdir -p ${PKG}/$prefix/include/lua-${lua_version}
+			mv ${PKG}/$prefix/include/$i ${PKG}/$prefix/include/lua-${lua_version}/$i
+			ln -s $prefix/include/lua-${lua_version}/$i ${PKG}/$prefix/include/$i
+		done
+		for i in $(ls ${PKG}/$prefix/lib | egrep -v '^lua$'); do
+			mkdir -p ${PKG}/$prefix/lib/lua-${lua_version}
+			mv ${PKG}/$prefix/lib/$i ${PKG}/$prefix/lib/lua-${lua_version}/$i
+			ln -s $prefix/lib/lua-${lua_version}/$i ${PKG}/$prefix/lib/$i
+		done
+	fi
+}
+
