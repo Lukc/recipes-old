@@ -3,6 +3,8 @@ maintainer="Kooda <kooda [at] upyum.com>"
 license="MIT"
 
 description="Lua binding to the Discount markdown library"
+longdesc="A binding to Discount, a fast C implementation of the Markdown text
+to HTML markup system. Discount passes the Markdown test suite."
 
 name=lua-discount
 version=devel
@@ -11,6 +13,7 @@ _luaver="$(luac -v | cut -d' ' -f2 | cut -d'.' -f1-2)"
 
 url=http://github.com/asb/lua-discount
 source=git://github.com/asb/lua-discount.git
+lastver="git:lastver $source"
 
 build() {
 	cd $name
