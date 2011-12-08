@@ -9,7 +9,7 @@ the video content. It has low memory footprint compared to other
 similar tools."
 
 name=cclive
-version=0.7.6
+version=0.7.8
 release=1
 depends=(quvi boost)
 
