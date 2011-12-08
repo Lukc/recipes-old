@@ -43,7 +43,7 @@ name=wmfs
 version=devel
 release=1
 source=(git://git.wmfs.info/wmfs.git)
-lastver="echo $version.0" # It’s git, never really up to date.
+lastver="git:lastver $source"
 
 build() {
 	cd $name
