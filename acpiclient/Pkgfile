@@ -7,14 +7,16 @@ devices."
 url=http://sourceforge.net/projects/acpiclient/
 packager="piernov <SMTP: piernov AT piernov DOT servegame DOT org>"
 oldmaintainer="piernov <SMTP: piernov AT piernov DOT servegame DOT org>"
-maintainer=""
-depends=(glibc)
+maintainer="Lukc <lukc@upyum.com>"
+license="GPLv2"
+depends=(glibc) # You certain of that?
 
 name=acpiclient
 version=1.5
 release=2
-source=(http://downloads.sourceforge.net/$name/acpi-$version.tar.gz)
 
 dirname="acpi-$version"
-includes=(autotools)
+includes=(sourceforge autotools)
+sf_name=acpi
+sf_dirname=$name
 
