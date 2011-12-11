@@ -12,7 +12,7 @@ depends=(expat)
 
 url=http://matthewwild.co.uk/projects/luaexpat/
 source=($url/$name-$version.tar.gz)
-lastver=
+lastver="lastver \$(wcat 'http://files.luaforge.net/releases/luaexpat/LuaExpat' | grep '>LuaExpat ' | sed -e 's/.*>LuaExpat //;s/<\/a>.*//' )"
 
 _luaver="$(luac -v|cut -d' ' -f2|cut -d'.' -f1-2)"
 _luanver="${_luaver/\./0}"
