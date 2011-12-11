@@ -19,12 +19,9 @@ name=fbterm
 version=1.7.0
 release=1
 
-url="http://$name.googlecode.com"
-source=($url/files/$name-$version.tar.gz)
-lastver=
 depends=(freetype fontconfig)
 
 use_autogen=no
 dirname="$name-${version/.0//}"
-includes=(autotools)
+includes=(autotools googlecode.com)
 
