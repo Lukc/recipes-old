@@ -1,0 +1,35 @@
+packager="Lukc <XMPP/SMTP:lukc@upyum.com>"
+maintainer="Lukc <XMPP/SMTP:lukc@upyum.com>"
+description="A TTY clock in NCurses."
+url=https://github.com/xorg62/tty-clock
+license=BSD
+
+longdesc="This TTY clock in NCurses supports choosing color, the date
+format and some other cool-looking features. There is currently no
+“stable” release, so the main git repository is used.
+
+This package does not use one of the numerous forks present of github,
+but the main repository."
+
+depends=(ncurses)
+
+iuse=()
+
+name=tty-clock
+version=devel
+release=1
+source=(git://github.com/xorg62/$name.git)
+
+no_extraction=yes # Not required.
+
+build() {
+	# tty-clock’s Makefile sucks very much. Compiling by hand is much easier…
+	subinfo "Building binary."
+	${CC:-cc} $PKGMK_SOURCE_DIR/$name/ttyclock.c -lncurses -o tty-clock
+	mkdir -p $PKG$bindir
+	subinfo "Installing."
+	cp tty-clock $PKG$bindir/tty-clock
+}
+
+lastver="git:lastver $source"
+
