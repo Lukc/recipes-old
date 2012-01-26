@@ -37,6 +37,7 @@ build() {
 	)
 	if use pmake; then
 		pmake ${makeopts[@]} all install
+		sedi "s/bmake/pmake/" $PKG$prefix/bin/mkcmake
 	else
 		bmake ${makeopts[@]} all install
 	fi
