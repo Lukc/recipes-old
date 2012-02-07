@@ -1,0 +1,14 @@
+packager="Pingax <anthony@pingax.no-ip.info>"
+maintainer="Pingax <anthony@pingax.no-ip.info>"
+licence="PSF or ZPL"
+
+description="setuptools replacement"
+longdesc=""
+
+name=distribute
+version=0.6.24
+release=1
+depends=(python)
+
+url=http://packages.python.org/distribute
+includes=(autotools pypi python)
