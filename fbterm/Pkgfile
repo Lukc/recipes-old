@@ -19,7 +19,7 @@ name=fbterm
 version=1.7.0
 release=1
 
-depends=(freetype fontconfig)
+depends=(freetype fontconfig); if $Arch; then depends=(${depends[@]/freetype/freetype2}); fi
 
 use_autogen=no
 dirname="$name-${version/.0//}"
