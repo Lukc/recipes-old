@@ -17,8 +17,8 @@ iuse=(imlib2 xrandr xinerama)
 
 use_imlib2=(1 "Build imlib2 supports and adds support of many images formats.")
 # FIXME: What are those two for, alreadỷ?
-use_xrandr=(1)
-use_xinerama=(0)
+use_xrandr=(1 "Build with xrandr support.")
+use_xinerama=(0 "Build with Xinerama support.")
 
 for use in ${iuse[@]}; do
 	if use $use; then

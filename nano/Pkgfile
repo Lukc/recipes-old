@@ -19,7 +19,9 @@ release=1
 source=(http://www.nano-editor.org/dist/v${version%.*}/$name-$version.tar.gz)
 lastver="wcat '$url' | egrep '(stable)' | sed -e 's/ (stable).*//'"
 
-includes=(autotools)
+includes=(autotools autosplits)
+
+autosplits=(man locales)
 
 iuse=(nls)
 if ! use nls; then
@@ -36,4 +38,6 @@ post_build() {
 		rm -r $PKG/$sharedir/nano
 	fi
 	rm $PKG/$bindir/rnano $PKG/$mandir/man1/rnano.1
+	
+	autosplit
 }
