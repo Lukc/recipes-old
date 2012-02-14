@@ -1,0 +1,16 @@
+packager="Pingax <anthony_at_pingax_dot_no-ip.info>"
+maintainer="Pingax <anthony_at_pingax_dot_no-ip.info>"
+licence="GPLv3"
+
+description="Fast, light and extensible chat client"
+longdesc=""
+
+name=weechat
+version=0.3.5
+release=1
+depends=(python lua perl libgcrypt gnutls aspell)
+
+url=http://www.weechat.org
+source=($url/files/src/$name-$version.tar.gz)
+
+includes=(autotools)
