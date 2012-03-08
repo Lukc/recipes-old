@@ -16,4 +16,5 @@ depends=('luajit' 'physfs' 'freetype2' 'devil' 'mpg123' 'openal' 'libvorbis' 'li
 
 source=(https://bitbucket.org/rude/love/downloads/love-0.7.2-linux-src.tar.gz)
 
+dirname=love-HEAD
 includes=(autotools)
