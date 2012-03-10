@@ -113,7 +113,7 @@ colors
 
 title "pkg++ standards compliance"
 
-for packager in Youbi Kooda Lukc; do
+for packager in Youbi Kooda Lukc Pingax; do
 	subtitle "$packager"
 	: > log.$packager
 	for i in *; do
