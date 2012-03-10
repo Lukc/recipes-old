@@ -14,6 +14,11 @@ license='zlib/libpng'
 url='https://love2d.org/'
 depends=('luajit' 'physfs' 'freetype2' 'devil' 'mpg123' 'openal' 'libvorbis' 'libmodplug' 'sdl')
 
+if $Crux; then
+	depends=(${depends[@]//sdl/libsdl})
+	depends=(${depends[@]//freetype2/freetype})
+fi
+
 source=(https://bitbucket.org/rude/love/downloads/love-0.7.2-linux-src.tar.gz)
 
 dirname=love-HEAD
