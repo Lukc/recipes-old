@@ -1,9 +1,8 @@
 name=love
 
-maintainer='youbi youbi@upyum.com'
-packager='youbi youbi@upyum.com'
+maintainer='Youbi <youbi [at] upyum [dot] com>'
+packager='Youbi <youbi [at] upyum [dot] com>'
 
-version='0.7.2'
 release=1
 description='An open-source 2D game engine which uses the versatile Lua scripting language to create dynamic gaming experiences.'
 longdesc='Löve is a framework for making 2D games in the Lua programming language. LÖVE is totally free,
@@ -14,7 +13,18 @@ license='zlib/libpng'
 url='https://love2d.org/'
 depends=('luajit' 'physfs' 'freetype2' 'devil' 'mpg123' 'openal' 'libvorbis' 'libmodplug' 'sdl')
 
-source=(https://bitbucket.org/rude/love/downloads/love-0.7.2-linux-src.tar.gz)
+if [[ "$version" == devel ]]; then
+	source=(hg+https://bitbucket.org/rude/love)
+	
+	pre_build() {
+		cd love
+		./platform/unix/automagic
+	}
+else
+	source=(https://bitbucket.org/rude/love/downloads/love-${version}-linux-src.tar.gz)
+	
+	dirname=love-HEAD
+fi
 
-dirname=love-HEAD
 includes=(autotools)
+
