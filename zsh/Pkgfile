@@ -22,8 +22,8 @@ if use pcre; then
 fi
 
 name=zsh
-version=4.3.12
-release=2
+version=4.3.17
+release=1
 source=(http://www.zsh.org/pub/$name-$version.tar.bz2 zsh-lovers.1)
 lastver='wcat "http://zsh.sourceforge.net/Arc/source.html" | egrep "zsh-.*\.tar\.gz" | head -n 1 | sed -e "s/\.tar\.gz<\/a>.*//;s/.*>zsh-//"'
 
