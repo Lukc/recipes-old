@@ -11,7 +11,11 @@ format and some other cool-looking features. There is currently no
 This package does not use one of the numerous forks present of github,
 but the main repository."
 
-depends=(ncurses)
+if $Debian; then
+	depends=(libncurses5)
+else
+	depends=(ncurses)
+fi
 
 iuse=()
 
