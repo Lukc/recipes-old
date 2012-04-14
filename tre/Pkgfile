@@ -12,6 +12,7 @@ approximate (fuzzy) matching."
 name=tre
 version=0.8.0
 release=1
+class=library
 source=(http://laurikari.net/tre/tre-$version.tar.bz2)
 lastver="wcat \"http://laurikari.net/tre/download/\" | grep \"tre-.*\.tar\.bz2\" | sed -e 's/\.tar\.bz2<.*//;s/.*>tre-//'"
 
