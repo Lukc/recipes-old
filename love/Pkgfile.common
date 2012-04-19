@@ -26,5 +26,10 @@ else
 	dirname=love-HEAD
 fi
 
+if $Crux; then
+	depends=(${depends[@]//sdl/libsdl})
+	depends=(${depends[@]//freetype2/freetype})
+fi
+
 includes=(autotools)
 
