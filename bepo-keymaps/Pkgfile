@@ -1,0 +1,38 @@
+
+packager="Lukc <lukc@upyum.com>"
+maintainer="Lukc <lukc@upyum.com>"
+description="Files to use bépo in a Linux console/TTy."
+license="CC-BY-SA or GFDL"
+
+#longdesc="Le bépo est une disposition de symboles et de caractères conçue pour
+#les claviers d’ordinateur afin de faciliter la saisie du français, 
+#des éléments typographiques, sans oublier les symboles de programmation. 
+#Elle donne accès à de nombreux caractères d’autres langues.
+#
+#Ce paquet permet l’utilisation du bépo dans un TTy Linux."
+
+name=bepo-keymaps
+version=1.0rc2
+release=1
+source=(http://download.tuxfamily.org/dvorak/keymaps/fr-dvorak-$name-$version.tgz)
+
+iuse=(unicode)
+
+build() {
+	cd fr-dvorak-$name-$version
+	mkdir -p "$PKG$sharedir/kbd/keymaps/i386/dvorak"
+
+	cp fr-dvorak-bepo-utf8.map "$PKG$sharedir/kbd/keymaps/i386/dvorak"
+	cp fr-dvorak-bepo.map "$PKG$sharedir/kbd/keymaps/i386/dvorak"
+
+	for F in "$PKG$sharedir"/kbd/keymaps/i386/dvorak/*.map; do
+		gzip -9 "$F"
+	done
+
+	if use unicode; then
+		ln -s "$sharedir/kbd/keymaps/i386/dvorak/fr-dvorak-bepo-utf8.map.gz" "$PKG$sharedir/kbd/keymaps/i386/dvorak/bepo.map.gz"
+	else
+		ln -s "$sharedir/kbd/keymaps/i386/dvorak/fr-dvorak-bepo.map.gz" "$PKG$sharedir/kbd/keymaps/i386/dvorak/bepo.map.gz"
+	fi
+}
+
