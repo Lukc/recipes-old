@@ -7,7 +7,7 @@ url=http://www.crufty.net/help/sjg/bmake.html
 license="BSD"
 
 name=bmake-mk-files
-version=20120112
+version=20120420
 release=1
 source=(ftp://ftp.netbsd.org/pub/NetBSD/misc/sjg/mk-$version.tar.gz)
 # The .0 in the last sed command is due to a bug in pkg++’ vercmp.
