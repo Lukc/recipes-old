@@ -9,7 +9,7 @@ license="BSD"
 depends=(bmake-mk-files)
 
 name=bmake
-version=20111111
+version=20120424
 release=1
 source=(ftp://ftp.netbsd.org/pub/NetBSD/misc/sjg/$name-$version.tar.gz)
 # The .0 in the last sed command is due to a bug in pkg++’ vercmp.
