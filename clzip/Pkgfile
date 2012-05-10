@@ -17,7 +17,7 @@ unsafe and deprecated lzma-alone file format (.lzma)."
 lastver="lastver \$(wcat http://download.savannah.gnu.org/releases/lzip/ | grep 'clzip' | sed -e 's/<\/a.*//;s/.*>//;s/clzip-//;s/\.tar\..*//')"
 
 name=clzip
-version=1.2
+version=1.3
 release=1
 source=(http://download.savannah.gnu.org/releases/lzip/$name-$version.tar.gz)
 includes=(autotools)
